@@ -1,9 +1,8 @@
 const express = require('express');
 const app = express();
-app.use(express.json());
 const mysql = require('mysql2')
 
-const connection = mysql.createConnection({
+const pool = mysql.createPool({
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASS,
@@ -12,17 +11,19 @@ const connection = mysql.createConnection({
 
 
 const post = (req, res) => {
-    const { description } = req.body;
-    connection.query(`INSERT INTO missio20_team4.tasks (name, email, password) VALUES ('${description}), NOW()`,
+    const { name, email, password } = req.body;
+    pool.query(`INSERT INTO \`missio20_team4\`.studentTable (name,email,password) VALUES ("${name}", "${email}", "${password}");`,
     (error, result) => {
         if (error) {
             console.log(error)
         } else {
             console.log(result);
             res.json(result);
+            res.end()
         };
     });
 };
+app.use(express.json());
 
 module.exports = {
     post

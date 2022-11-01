@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 }) 
 
 const gettingInfo = (req, res) => {
-    connection.query(`SELECT name, email, password FROM student WHERE teacher_id = 1`, (error, result) => { ;
+    connection.query(`SELECT name, email, password FROM studentTable WHERE teacher_id = 1`, (error, result) => { ;
         res.send(result)
     
 })};
