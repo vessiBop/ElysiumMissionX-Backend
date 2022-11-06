@@ -3,7 +3,7 @@ const router = express.Router();
 const mysql = require('mysql2');
 const pool = require('./db')
 
-router.post('/authentication/signup', (req, res) => {
+router.post('/authentication/signup-student', (req, res) => {
     const { name, email, password } = req.body;
     pool.query(`INSERT INTO \`missio20_team4\`.studentTable (name,email,password) VALUES ("${name}", "${email}", "${password}");`,
     (error, result) => {
